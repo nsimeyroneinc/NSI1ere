@@ -1,0 +1,964 @@
+\documentclass[12pt]{book}
+%\usepackage[papersize={125mm,205mm},tmargin=1.5cm,bmargin=1.5cm,hmargin=1cm]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage{../preambule_NSI_2021/MichaelNSI2021}
+
+
+\setcounter{minitocdepth}{1}
+\usepackage{qrcode}
+
+\mtcselectlanguage{francais}
+
+
+%%%%%%%% Faire de l'air autour d'une fraction (surtout ds un tableau)
+\newcommand{\delair}[1]{\ensuremath\displaystyle\psframebox[framesep=0.15em,linestyle=none]{ \displaystyle1}}
+
+
+\fancyhead[L]{\includegraphics[scale=0.03]{../preambule_NSI_2021/LATEXimages/NSI_600}\normalsize N.S.I : Numérique et Science Informatique}
+%\fancyhead[R]{\normalsize \rightmark}
+\renewcommand\headrulewidth{1pt}
+\renewcommand\footrulewidth{1pt}
+%\fancyfoot[L]{Terminale $S$}
+\fancyfoot[C]{\includegraphics[scale=0.75]{../preambule_NSI_2021/creative_licence_compact}}%\textbf{Page \thepage/\pageref{LastPage}}}
+%\fancyfoot[R]{\textbf{Page \thepage}}%\pageref{LastPage}}}
+
+
+\fancyfoot[LE]{$\blacksquare$\,$\blacksquare$\;\thechapter.\thepage}%
+\fancyfoot[RO]{\thechapter.\thepage\;$\blacksquare$\,$\blacksquare$}%
+\fancyfoot[LO]{\uppercase{\sffamily{Chapitre \thechapter}}}
+\fancyfoot[RE]{\normalsize\sffamily Chapitre \thechapter }
+\pagestyle{fancy}
+
+\renewcommand{\arraystretch}{1} 
+\renewcommand*\tabularxcolumn[1]{>{\centering\arraybackslash}m{#1}}
+%\usepackage[bloc,completemulti]{automultiplechoice}  
+
+\usepackage{comment}
+%\affichecorrectionfalse
+%\affichecorrectiontrue
+%\affichepreuvefalse
+%\excludecomment{preuve}
+
+
+
+\usepackage{tcolorbox}
+
+\usepackage{arydshln}
+
+\usepackage{auto-pst-pdf}
+%\usepackage{pdftricks}
+%\begin{psinputs}
+%	\usepackage{pstricks,pst-plot,pst-text,pst-tree,pst-eps,pst-fill,pst-node,pst-math,pst-eucl,pst-all}
+%	\usepackage{multido}
+%\end{psinputs}
+
+\usepackage{picins}
+\usepackage[tikz]{bclogo}
+\author{M.Meyroneinc}
+\title{Première}
+
+
+%---- Mise en diapo :
+%\usepackage[
+%screen,
+%%print,
+%%panelright,
+%nopanel,
+%%paneltoc,
+%bluelace,
+%french,
+%sectionbreak]{
+%	pdfscreen}
+%\margins{.75in}{.75in}{.75in}{.75in}
+%\screensize{6.25in}{8in}
+%\overlay{overlay4.pdf}
+%%\overlay{lightsteelblue.pdf }
+%\panelhomepagename{Page d’accueil}
+%\panelfullscreenname{Plein écran}
+%\bottombuttons
+%\pagedissolve{/Box}
+
+
+\def\colorminted{gray!10!white}
+
+% Ajustement de l'espace dans la table des matières
+\newlength{\ecartnumero}
+
+\setlength{\ecartnumero}{4mm}
+%\usepackage{titlesec}
+\usepackage{titletoc}
+\titlecontents{chapter}%
+[\dimexpr 2.5mm+\ecartnumero]
+{\vspace{2.2mm}\bfseries}
+{\contentslabel{\dimexpr 10mm+\ecartnumero}}
+{\hspace{\dimexpr -5.5mm-\ecartnumero}}
+{\hfill\contentspage}
+
+\dottedcontents{section}%
+[\dimexpr 15mm+\ecartnumero]
+{}
+{\dimexpr 15mm+\ecartnumero}
+{3.2mm}
+
+\dottedcontents{subsection}%
+[\dimexpr 20mm+\ecartnumero]
+{}
+{\dimexpr 15mm+\ecartnumero}
+{3.2mm}
+
+\dottedcontents{subsubsection}%
+[\dimexpr 25mm+\ecartnumero]
+{}
+{\dimexpr 15mm+\ecartnumero}
+{3.2mm}
+
+%\usepackage{marvosym}
+
+\begin{document}
+   \dominitoc
+  
+\theme{T6}
+\Tsix
+\faketableofcontents
+\setcounter{chapter}{22}
+
+\chapter{Les Dictionnaires}
+\minitoc     
+ 
+
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    \hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Prenons l'exemple d'un répertoire téléhonique. Nous pouvons le mémoriser
+simplement comme un tableau (ou liste) de tableaux
+\texttt{{[}nom,numéro{]}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{liste\PYZus{}tel} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Paul}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5234}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Emile}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5345}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Victor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5186}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rose}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5678}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hélène}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5432}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Si nous voulons appeler \emph{Rose}, nous avons deux possibilités avec
+un tel tableau : * soit il faut savoir que les informations la
+concernant sont dans le quatrième élément de la liste (ce qui ne semble
+pas très pratique et réaliste)
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{liste\PYZus{}tel}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} il faut savoir que l\PYZsq{}index de Rose est 3}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{itemize}
+\tightlist
+\item
+  soit nous cherchons dans le tableau en partant du premier élément de
+  la liste jusqu'à ce que nous trouvions \emph{Rose} (ce qui revient à
+  feuilleter son répertoire) : cela nécessite d'utiliser une boucle pour
+  parcourir le tableau.
+\end{itemize}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{element} \PY{o+ow}{in} \PY{n}{liste\PYZus{}tel}\PY{p}{:}
+    \PY{k}{if} \PY{n}{element}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{element}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5678
+    \end{Verbatim}
+
+    Vous conviendrez que ce n'est pas pratique pour accéder à son numéro de
+téléphone. De même, la modification ou l'ajout d'un information
+nécessiterait de devoir feuilleter tout le répertoire. Il semblerait
+plus pratique d'associer un nom à un numéro, autrement dit d'associer à
+une \textbf{information} à une \textbf{clé}.
+
+C'est ce que les dictionnaires permettent !
+
+    \hypertarget{les-dictionnaires-en-python}{%
+\section{Les dictionnaires en
+Python}\label{les-dictionnaires-en-python}}
+
+    \begin{verbatim}
+Un dictionnaire est un ensemble <strong>non ordonné</strong> de paires (clé, valeur) avec un accès très rapide à la valeur à partir de la clé.
+\end{verbatim}
+
+    On peut ajouter des couples (clé, valeur) à un dictionnaire, si la clé
+figure déjà dans le dictionnaire alors le couple est remplacé par le
+nouveau. Une \textbf{clé} peut être de type alphabétique, numérique, ou
+même de type construit sous certaines conditions. Les \textbf{valeurs}
+pourront être de tout type sans exclusion. En Python, le dictionnaire
+est un objet \textbf{mutable}, autrement dit, on peut le modifier.
+
+    \hypertarget{cruxe9ation-dun-dictionnaire}{%
+\subsection{Création d'un
+dictionnaire}\label{cruxe9ation-dun-dictionnaire}}
+
+Plusieurs méthodes permettent de créer soit un dictionnaire vide, soit
+de le noter en extension, soit par compréhension.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{d1} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}     \PY{c+c1}{\PYZsh{} Création d\PYZsq{}un dictionnaire vide}
+\PY{n}{d2} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Création d\PYZsq{}un dictionnaire vide (autre méthode)}
+\PY{n}{d3} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bananes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abricots}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} création d\PYZsq{}un dictionnaire par extension}
+\PY{n}{d4} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:} \PY{n}{k}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} création d\PYZsq{}un dictionnaire par compréhension}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{type}\PY{p}{(}\PY{n}{d1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'dict'>
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d1 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d2 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d3 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d3}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d4 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d4}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d1 => \{\}
+d2 => \{\}
+d3 => \{'poires': 5, 'bananes': 7, 'abricots': 12\}
+d4 => \{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81\}
+    \end{Verbatim}
+
+    Il est même possible de créer un dictionnaire à partir d'une liste de
+couples.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{liste} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cle1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valeur1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cle2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valeur2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+\PY{n}{d5} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{liste}\PY{p}{)}
+\PY{n}{liste\PYZus{}tel} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Paul}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5234}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Emile}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5345}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Victor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5186}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rose}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5678}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hélène}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{5432}\PY{p}{]}\PY{p}{]}
+\PY{n}{d6} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{liste\PYZus{}tel}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d5 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d5}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d6 =\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d6}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d5 => \{'cle1': 'valeur1', 'cle2': 'valeur2'\}
+d6 => \{'Paul': 5234, 'Emile': 5345, 'Victor': 5186, 'Rose': 5678, 'Hélène':
+5432\}
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{Important} : Vous aurez noté que les dictionnaires Python se
+représentent entre accolades \texttt{\{\}}. Les différentes paires sont
+séparées par des virgules et sont de la forme \texttt{clé:\ valeur}.
+\end{quote}
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{activituxe9-23.1}{%
+\subsubsection{Activité 23.1}\label{activituxe9-23.1}}
+
+Créez un dictionnaire appelé \texttt{notes} qui contient les paires
+(matières, moyenne) de vos trois spécialités. Affichez ensuite ce
+dictionnaire.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{} à vous de jouer !}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{accuxe8s-modification-ajout-suppression}{%
+\subsection{Accès, modification, ajout,
+suppression}\label{accuxe8s-modification-ajout-suppression}}
+
+L'\textbf{accès} à une valeur d'un dictionnaire se fait par sa clé.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{d3} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bananes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abricots}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}}
+\PY{n}{d3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abricots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+12
+\end{Verbatim}
+\end{tcolorbox}
+        
+    Le dictionnaire étant un objet \emph{mutable} on peut \textbf{modifier}
+la valeur associée à une clé ou \textbf{ajouter} une nouvelle
+association et afficher le dictionnaire modifié.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paul}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5234}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5345}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Victor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5186}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5678}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hélène}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5432}\PY{p}{\PYZcb{}}
+\PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{4921}    \PY{c+c1}{\PYZsh{} clé existante donc modification de la valeur}
+\PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Louane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{4118}  \PY{c+c1}{\PYZsh{} nouvelle clé donc ajout d\PYZsq{}une nouvelle association}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'Paul': 5234, 'Emile': 5345, 'Victor': 5186, 'Rose': 4921, 'Hélène': 5432,
+'Louane': 4118\}
+    \end{Verbatim}
+
+    Pour \textbf{supprimer} une association d'un dictionnaire on peut
+utilise le mot clé \texttt{del}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\PY{k}{del} \PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paul}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'Paul': 5234, 'Emile': 5345, 'Victor': 5186, 'Rose': 4921, 'Hélène': 5432,
+'Louane': 4118\}
+\{'Emile': 5345, 'Victor': 5186, 'Rose': 4921, 'Hélène': 5432, 'Louane': 4118\}
+    \end{Verbatim}
+
+    \hypertarget{taille-dun-dictionnaire}{%
+\subsection{Taille d'un dictionnaire}\label{taille-dun-dictionnaire}}
+
+La fonction \texttt{len} renvoie la taille d'un dictionnaire.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{d3} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bananes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abricots}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}}
+\PY{n+nb}{len}\PY{p}{(}\PY{n}{d3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+3
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{activituxe9-23.2}{%
+\subsubsection{Activité 23.2}\label{activituxe9-23.2}}
+
+On reprend le dictionnaire \texttt{notes} de l'activité 1.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Affichez la moyenne de NSI.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Modifiez votre moyenne de NSI qui a gagné 2 points. Affichez le
+  dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Ajoutez la matière \texttt{Anglais} avec sa moyenne. Affichez le
+  dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Affichez la taille du dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Supprimez une des trois spécialités et affichez le dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{les-ituxe9rateurs-pour-les-dictionnaires}{%
+\section{Les itérateurs pour les
+dictionnaires}\label{les-ituxe9rateurs-pour-les-dictionnaires}}
+
+Il est possible de parcourir un dictionnaire de trois manières :
+
+\begin{itemize}
+\tightlist
+\item
+  parcourir l'ensemble des \textbf{clés} avec la méthode \texttt{keys()}
+  ;
+\item
+  parcourir l'ensemble des \textbf{valeurs} avec la méthode
+  \texttt{values()} ;
+\item
+  parcourir l'ensemble des \textbf{paires clés-valeurs} avec la méthode
+  \texttt{items()}.
+\end{itemize}
+
+On peut itérer sur un dictionnaire grâce à l'une de ces méthodes.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{d} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paul}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5234}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5345}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Victor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5186}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5678}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hélène}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5432}\PY{p}{\PYZcb{}}
+\PY{k}{for} \PY{n}{prenom} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{prenom}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Paul
+Emile
+Victor
+Rose
+Hélène
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5234
+5345
+5186
+5678
+5432
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{for} \PY{n}{prenom}\PY{p}{,} \PY{n}{num} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{prenom}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Paul -> 5234
+Emile -> 5345
+Victor -> 5186
+Rose -> 5678
+Hélène -> 5432
+    \end{Verbatim}
+
+    On peut aussi interroger l'appartenance d'une valeur ou d'une clé grâce
+au mot clé \texttt{in}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{John}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+False
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paul}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+False
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{l+m+mi}{5186} \PY{o+ow}{in} \PY{n}{d}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+            \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
+\prompt{Out}{outcolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+True
+\end{Verbatim}
+\end{tcolorbox}
+        
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{activituxe9-23.3}{%
+\subsubsection{Activité 23.3}\label{activituxe9-23.3}}
+
+On considère le dictionnaire \texttt{fruits} suivant.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pommes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{11}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bananes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abricots}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Affichez tous les fruits du dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Affichez toutes les quantités du dictionnaire.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Ecrivez un programme permettant d'obtenir l'affichage suivant.
+\end{enumerate}
+
+\begin{verbatim}
+Il reste 5 poires
+Il reste 11 pommes
+Il reste 7 bananes
+Il reste 12 abricots
+\end{verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    Les dictionnaires : EXERCICES
+
+    \hypertarget{exercice-23.1}{%
+\section{Exercice 23.1 :}\label{exercice-23.1}}
+
+On considère le dictionnaire suivant qui contient différents fruits
+ainsi que leurs quantités.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pommes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{melons}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poires}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Quelle instruction permet d'accéder au nombre de melons ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  On a acheté 16 clémentines et utilisé 4 pommes pour faire une tarte.
+  Quelles instructions permettent de mettre à jour le dictionnaire ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{exercice-23.2}{%
+\section{Exercice 23.2 :}\label{exercice-23.2}}
+
+Répondez aux questions suivantes \textbf{sans exécuter les scripts
+proposés}. \emph{Vous les exécuterez pour vérifier vos réponses.} 1.
+Qu'affiche le programme suivant ?
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pommes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clémentines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}
+\PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{fruits}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Qu'affiche le programme suivant ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pommes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clémentines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}
+\PY{k}{for} \PY{n}{cle}\PY{p}{,} \PY{n}{valeur} \PY{o+ow}{in} \PY{n}{fruits}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{cle}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{valeur}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \textbf{Réponse :}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Qu'affiche le programme suivant ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pommes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clémentines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}
+\PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{fruits}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+    \PY{n+nb}{print}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \textbf{Réponse :}
+
+    \hypertarget{exercice-23.3}{%
+\section{Exercice 23.3}\label{exercice-23.3}}
+
+On considère qu'il faut ajouter un fruit sur la liste des courses s'il
+en reste 4 ou moins. 1. Ecrivez un programme qui affiche la liste des
+courses en considérant le dictionnaire suivant.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{fruits} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pommes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{melons}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poires}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clémentines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16}\PY{p}{\PYZcb{}}
+\PY{c+c1}{\PYZsh{} à compléter :}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Ecrivez une fonction \texttt{liste\_courses(fruits)} qui prend en
+  paramètre un dictionnaire \texttt{fruits} et qui renvoie un tableau
+  avec les fruits de la liste de courses.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{exercice-23.4}{%
+\section{Exercice 23.4 :}\label{exercice-23.4}}
+
+    Voici deux dictionnaires :
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{athletes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mike}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mf}{1.75}\PY{p}{,} \PY{l+m+mi}{68}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{John}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mf}{1.89}\PY{p}{,} \PY{l+m+mi}{93}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mf}{1.67}\PY{p}{,} \PY{l+m+mi}{62}\PY{p}{)}\PY{p}{\PYZcb{}}
+\PY{n}{sportifs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mike}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{taille}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1.75}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{68}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{John}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{taille}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1.89}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{93}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Kate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{taille}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1.67}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{poids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{62}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  De quel type sont les clés des deux dictionnaires \texttt{athletes} et
+  \texttt{sportifs}? De quels types sont les valeurs de ces deux
+  dictionnaires ?
+\end{enumerate}
+
+    \textbf{Réponse :}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Quelle instruction permet d'accéder à la taille de Kate dans le
+  dictionnaire \texttt{athletes} ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Quelle instruction permet d'accéder à la taille de Kate dans le
+  dictionnaire \texttt{sportifs} ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{exercice-23.5}{%
+\section{Exercice 23.5 :}\label{exercice-23.5}}
+
+Le Scrabble est un jeu de société où l'on doit former des mots avec
+tirage aléatoire de lettres, chaque lettre valant un certain nombre de
+points. Le dictionnaire \texttt{scrabble} contient cette association
+entre une lettre et son nombre de points.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{scrabble} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{H}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{I}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{U}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+\end{tcolorbox}
+
+    Ecrivez une fonction \texttt{points(mot)} qui renvoie le nombre de
+points au scrabble de \texttt{mot}, qui est une chaîne de caractères
+majuscules.
+
+\emph{Par exemple, le mot ``ARBRE'' doit rapporter 7 points, le mot
+``XYLOPHONE'' doit rapporter 32 points}.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{exercice-23.6}{%
+\section{Exercice 23.6}\label{exercice-23.6}}
+
+On considère la variable \texttt{personnages} suivante qui réunit
+quelques informations sur des personnalités (les âges sont fictifs, vous
+l'aurez compris).
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{personnages} \PY{o}{=} \PY{p}{[}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Einstein}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prénom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Albert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{âge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+           \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hamilton}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prénom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Margaret}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{âge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{23}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+           \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nelson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prénom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{âge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+           \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Curie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prénom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marie}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{âge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{41}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{]}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Quel est le type de la variable \texttt{personnages}? Quel est le type
+  des éléments de \texttt{personnages} ?
+\end{enumerate}
+
+    \textbf{Réponse :}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Quelle instruction permet d'accéder au dictionnaire de Ted Nelson ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Quelle instruction permet d'accéder à l'âge de Ted Nelson ?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Dans le programme suivant, quel est le type de la variable \texttt{p}
+  à chaque tour de boucle ? Quel est le rôle de ce programme ?\\
+\end{enumerate}
+
+\begin{verbatim}
+for p in personnages:
+    if int(p['âge']) <= 40:
+        print(p['nom'], p['prénom'])
+\end{verbatim}
+
+    \textbf{Réponse :}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Proposez un programme qui affiche uniquement les noms et prénoms des
+  femmes du tableau \texttt{personnages}.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Ecrivez une fonction \texttt{age\_moyen(personnages)} qui renvoie
+  l'âge moyen des personnalités du tableau \texttt{personnages} entré en
+  paramètre. \emph{On doit trouver 40,75 ans}.
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\end{Verbatim}
+\end{tcolorbox}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
